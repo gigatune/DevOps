@@ -7,7 +7,9 @@ package "postgresql-server" do
 end
 
 execute "postgrosql-init" do
+  not_if "test -f /var/lib/pgsql/data/postgresql.conf"
   command "service postgresql initdb"
+  action :run
 end
 
 service "postgresql" do
